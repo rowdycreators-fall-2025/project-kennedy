@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     bool IsOnGround()
     {
         // checks if shpere area at the bottom of the character collides with floor
-        if (Physics.CheckSphere(transform.position - Vector3.up, .1f, LayerMask.GetMask("Default"))) return true;
+        if (Physics.CheckSphere(transform.position - Vector3.up * .5f, .6f, LayerMask.GetMask("Default"))) return true;
         return false;
     }
 
