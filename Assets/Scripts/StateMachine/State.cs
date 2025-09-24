@@ -3,7 +3,7 @@ using UnityEngine;
 // abstract class States that acts as the blueprint for all States of any type
 public abstract class State<T>
 {
-    // generic type owner
+    // generic type owner, in which the States will belong to
     T owner;
 
     // constructor for the class, takes a generic owner as input, assigns it to the current generic owner
