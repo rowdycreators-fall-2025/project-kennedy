@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     {
         // creates a new StateMachine for the Enemy and sets the default state
         enemyStateMachine = GetComponent<StateMachine<Enemy>>();
-        enemyStateMachine.ChangeState(new EnemyIdleState());
+        enemyStateMachine.ChangeState(new EnemyIdleState(this));
     }
 
     // Update is called once per frame
