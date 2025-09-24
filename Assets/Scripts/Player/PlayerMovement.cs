@@ -3,7 +3,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private CharacterController _character;
 
     public float MaxWalkSpeed = 10f;
@@ -41,11 +40,13 @@ public class PlayerMovement : MonoBehaviour
 
     bool IsOnGround()
     {
+        // checks if shpere area at the bottom of the character collides with floor
         if (Physics.CheckSphere(transform.position - Vector3.up, .1f, LayerMask.GetMask("Default"))) return true;
         return false;
     }
 
 
+    // gets the acceleration value used for different situations
     float GetWalkAccelValue()
     {
         if (IsOnGround())
