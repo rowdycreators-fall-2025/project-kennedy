@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Enemy class for a game object
 public class Enemy : MonoBehaviour
 {
     StateMachine<Enemy> enemyStateMachine;
@@ -8,7 +9,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         // creates a new StateMachine for the Enemy and sets the default state
-        enemyStateMachine = GetComponent<StateMachine<Enemy>>();
+        enemyStateMachine = new StateMachine<Enemy>();
         enemyStateMachine.ChangeState(new EnemyIdleState(this));
     }
 

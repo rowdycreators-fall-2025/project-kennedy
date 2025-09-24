@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class State<T>
 {
     // generic type owner, in which the States will belong to
-    T owner;
+    protected T owner;
 
     // constructor for the class, takes a generic owner as input, assigns it to the current generic owner
     public State(T owner)
