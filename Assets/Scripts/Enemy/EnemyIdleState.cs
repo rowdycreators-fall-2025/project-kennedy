@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyIdleState
+public class EnemyIdleState: State<Enemy>
 {
     
 }
