@@ -21,7 +21,7 @@ public class EnemyChaseState : State<Enemy>
         // will switch do the Idle State if up arrow key is pressed
         if (Input.GetKeyDown(KeyCode.DownArrow) == true)
         {
-            // TODO
+            owner.enemyStateMachine.ChangeState(new EnemyIdleState(owner));
         }
     }
 

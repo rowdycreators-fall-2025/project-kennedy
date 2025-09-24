@@ -3,7 +3,7 @@ using UnityEngine;
 // Enemy class for a game object
 public class Enemy : MonoBehaviour
 {
-    StateMachine<Enemy> enemyStateMachine;
+    public StateMachine<Enemy> enemyStateMachine { get; private set; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // call the Update function of the current state every frame
+        enemyStateMachine.currentState?.Update();
     }
 }

@@ -9,7 +9,7 @@ public class StateMachine<T>
     // the ChangeState function Exits the current State and Enters the new State given by the parameter
     public void ChangeState(State<T> newState)
     {
-        currentState.Exit();
+        currentState?.Exit();
         currentState = newState;
         currentState.Enter();
     }
