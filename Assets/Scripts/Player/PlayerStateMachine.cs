@@ -1,10 +1,10 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerStateMachine : StateMachine<GameObject>
+public class PlayerStateMachine : StateMachine
 {
     private void Start()
     {
-        ChangeState(new PlayerWalkState(gameObject));
+        ChangeState(new PlayerWalkState(this));
     }
 }
