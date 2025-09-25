@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerWalkState : State<GameObject>
+public class PlayerWalkState : State
 {
     PlayerInputActions actions = new PlayerInputActions();
     MoveComponent move;
-    public PlayerWalkState(GameObject owner) : base(owner) 
+    public PlayerWalkState(StateMachine stateMachine) : base(stateMachine)
     {
-        move = owner.GetComponent<MoveComponent>();
+        move = stateMachine.GetComponent<MoveComponent>();
 
     }
 
@@ -31,6 +31,6 @@ public class PlayerWalkState : State<GameObject>
 
     void OnJump(InputAction.CallbackContext ctx)
     {
-        move.Jump();
+        if (move.IsOnGround()) move.Jump();
     }
 }
