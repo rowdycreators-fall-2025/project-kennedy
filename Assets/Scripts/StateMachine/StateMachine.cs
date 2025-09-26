@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // State Machine class, this class will contain the logic needed for States to change
-public class StateMachine
+public class StateMachine : MonoBehaviour
 {
     // declare the currentState variable of type State and include getters and setters
     public State currentState {  get; private set; }
