@@ -3,10 +3,10 @@ using UnityEngine;
 // abstract class States that acts as the blueprint for all States of any type
 public abstract class State
 {
-    // generic type owner, in which the States will belong to
+    // refrence to the state machine
     protected StateMachine _stateMachine;
 
-    // constructor for the class, takes a generic owner as input, assigns it to the current generic owner
+    // constructor for the class, takes a StateMachine as a parameter and initializes it to this StateMachine
     public State(StateMachine stateMachine)
     {
         this._stateMachine = stateMachine;

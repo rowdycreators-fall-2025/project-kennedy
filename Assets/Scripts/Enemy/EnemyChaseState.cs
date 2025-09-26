@@ -1,10 +1,10 @@
 using UnityEngine;
 
 // Enemy Chase State inherits the State class of type enemy
-public class EnemyChaseState : State<Enemy>
+public class EnemyChaseState : State
 {
-    // constructer for EnemyChaseState, takes a type Enemy as a parameter, and sets the Enemy type as the owner of the base class (State)
-    public EnemyChaseState(Enemy enemy) : base(enemy) { }
+    // constructer for EnemyChaseState, takes a StateMachine as a parameter, and sets the StateMachine type as the owner of the base class (State)
+    public EnemyChaseState(StateMachine enemyStateMachine) : base(enemyStateMachine) { }
 
 
     // function Enter is called when the State first enters
@@ -21,7 +21,7 @@ public class EnemyChaseState : State<Enemy>
         // will switch do the Idle State if up arrow key is pressed
         if (Input.GetKeyDown(KeyCode.DownArrow) == true)
         {
-            owner.enemyStateMachine.ChangeState(new EnemyIdleState(owner));
+            _stateMachine.ChangeState(new EnemyIdleState(_stateMachine));
         }
     }
 
