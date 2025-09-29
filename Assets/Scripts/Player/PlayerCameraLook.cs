@@ -35,7 +35,7 @@ public class PlayerCameraLook : MonoBehaviour
         transform.localRotation = Quaternion.Euler(_xRotation, 0, 0); // then rotate up/down
 
         if (!BobEnabled) return;
-        float characterSpeed = new Vector3(_character.velocity.x,0,_character.velocity.z).magnitude;
+        float characterSpeed = new Vector3(_character.velocity.x, 0, _character.velocity.z).magnitude;
 
         if (characterSpeed > 0)
         {
@@ -48,6 +48,34 @@ public class PlayerCameraLook : MonoBehaviour
         transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, 1f - Mathf.Pow(.01f, Time.deltaTime));
         if (Mathf.Abs(transform.forward.y) < .9f) // gaurds from bug where rotation changes when looking down/up
             transform.LookAt(player.position + transform.forward * 15f);
+
+        PerformRaycastAtCrosshair();
+    }
+
+    void PerformRaycastAtCrosshair()
+    {
+        // Calculates the center of the screen in pixel coordinates
+        // Screen.width and Screen.height give the current screen resolution
+        Vector3 screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
+
+        // raycasts forward at screen center
+        Ray ray = Camera.main.ScreenPointToRay(screenCenter);
+
+        // Using the ray for a RaycastHit
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            // If the ray hits something, you can access 'hit.collider.gameObject', 'hit.point', etc.
+            GameObject hitObject = hit.collider.gameObject;
+
+            Debug.Log("Ray hit: " + hitObject.name + " at " + hit.point); // debug
+
+            Interactable interactionInterface;
+            if (interactionInterface = hitObject.GetComponent<Interactable>())
+            {
+                interactionInterface.OnHover();
+            }
+        }
     }
 
     public void OnCameraPan(InputAction.CallbackContext context)

@@ -23,7 +23,7 @@ public class MoveComponent : MonoBehaviour
 
     void Update()
     {
-        Vector3 targetWalkDirection = transform.forward * MoveDirection.y + transform.right * MoveDirection.x;
+        Vector3 targetWalkDirection = (transform.forward * MoveDirection.y + transform.right * MoveDirection.x).normalized;
         Vector3 targetWalkVelocity = targetWalkDirection * MaxWalkSpeed;
 
         CurrentWalkVelocity = Vector3.MoveTowards(CurrentWalkVelocity, targetWalkVelocity, GetWalkAccelValue() * Time.deltaTime);

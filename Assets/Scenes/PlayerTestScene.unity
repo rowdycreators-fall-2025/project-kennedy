@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 728068519}
   - component: {fileID: 728068518}
   - component: {fileID: 728068522}
+  - component: {fileID: 728068523}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -385,6 +386,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &728068523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728068517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df509a842a1334963aa2545686c76663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Movable
+  player: {fileID: 1831244245}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,6 +587,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1831244245 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5900830788410865647, guid: ea8bab5851496cb40b2a0cd5c0b90307, type: 3}
+  m_PrefabInstance: {fileID: 4978715786085406683}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4978715786085406683
 PrefabInstance:
   m_ObjectHideFlags: 0

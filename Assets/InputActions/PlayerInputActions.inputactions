@@ -185,6 +185,110 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Interact",
+            "id": "218555b4-7c1d-471b-b5c9-78dbe377c5ce",
+            "actions": [
+                {
+                    "name": "PickUp",
+                    "type": "Button",
+                    "id": "abfe5b38-7250-4783-89f6-79eefa3f02a2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1a1dab17-3893-4d8f-847a-fe2f0b5de847",
+                    "path": "<Keyboard>/#(E)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PickUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Combat",
+            "id": "bda7f1af-239e-432c-b2f2-6f7a63a89ee0",
+            "actions": [
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "689063cc-cd2b-4d0e-9229-bbf899d113ee",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "11aed24f-7a31-441f-8a58-35c20b8ca661",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0590234d-62b8-401f-8aa6-18bc51d46fe3",
+                    "path": "<Keyboard>/#(R)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b67f6fb8-ddc6-412d-8d5b-39e6f68a664c",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Inventory",
+            "id": "223a35af-120e-4ef3-9c88-23cb9446c59f",
+            "actions": [
+                {
+                    "name": "Drop",
+                    "type": "Button",
+                    "id": "79f8060b-05f4-44d4-b4c1-4cfe4d90690b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "dfbfd45b-524e-47ce-a255-cef08743ac48",
+                    "path": "<Keyboard>/#(Q)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
