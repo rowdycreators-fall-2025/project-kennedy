@@ -1,18 +1,22 @@
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
+[RequireComponent(typeof(CharacterController))]
 public class MoveComponent : MonoBehaviour
 {
+    [HideInInspector]
     public CharacterController controller;
+    public Vector2 MoveDirection;
 
+    [Header("Speed Values")]
     public float MaxWalkSpeed = 10f;
     public float WalkAccel = 80f;
     public float WalkDeccel = 150f;
 
+    [Header("Jump Values")]
     public float JumpVelocity = 15f;
     public float GravityAccel = 30f;
 
-    public Vector2 MoveDirection;
     public Vector3 CurrentWalkVelocity { get; private set; } = Vector3.zero;
     private float _gravityVelocity = 0;
 
