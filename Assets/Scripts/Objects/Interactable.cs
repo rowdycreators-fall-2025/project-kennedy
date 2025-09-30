@@ -14,6 +14,10 @@ Subclasses:
 
 public class Interactable : MonoBehaviour
 {
+    // style
+    private float OUTLINE_WIDTH = 4.0f;
+    private Color OUTLINE_COLOR = Color.cyan;
+
     protected PlayerInputActions inputActions;
     protected List<InteractionBehavior> possibleActions; // keys and actions to display on hover
 
@@ -53,15 +57,56 @@ public class Interactable : MonoBehaviour
         // AFTER this runs, the PlayerCameraLook script calls OnHover, setting 1 object’s isHovered flag to true
     }
 
+    private void DisplayActions()
+    {
+        // shows available actions on the screen
+    }
+
+    private void HideActionsDisplay()
+    {
+
+    }
+
+    void LateUpdate()
+    {
+        if (!IsHovered())
+        {
+            HideActionsDisplay();
+            SetVisualHighlight(false);
+        }
+        else
+        {
+            DisplayActions();
+            SetVisualHighlight(true);
+        }
+    }
+
+    private void SetVisualHighlight(bool enable)
+    {
+        Outline outlineComponent;
+        if ((outlineComponent = gameObject.GetComponent<Outline>()) != null && !enable)
+        {
+            Destroy(outlineComponent);
+            return;
+        }
+        if (outlineComponent == null && enable)
+        {
+            outlineComponent = gameObject.AddComponent<Outline>();
+            outlineComponent.enabled = true;
+            outlineComponent.OutlineWidth = OUTLINE_WIDTH;
+            outlineComponent.OutlineColor = OUTLINE_COLOR;
+        }
+    }
+
     // called when the player hovers over the Interactible
     public void OnHover(GameObject hoverer)
     {
         whoIsHovering = hoverer;
 
-        if (hoverer.tag == "Player")
+        if (hoverer.tag == "Player") // if the hoverer is the player
         {
             // shows available actions on the screen if the hoverer is the player
-
+            DisplayActions();
         }
     }
 }
