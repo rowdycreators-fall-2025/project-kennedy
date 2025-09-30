@@ -879,8 +879,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d5ec6a97dcab144928525252509272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  Cube: {fileID: 0}
-  CubesAmount: 0
+  Cube: {fileID: 728068517}
+  CubesAmount: 500
 --- !u!4 &1337793752
 Transform:
   m_ObjectHideFlags: 0
