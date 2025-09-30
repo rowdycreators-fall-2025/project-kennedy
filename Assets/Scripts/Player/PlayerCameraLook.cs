@@ -5,6 +5,7 @@ public class PlayerCameraLook : MonoBehaviour
 {
     public Transform player;
     private CharacterController _character;
+
     public bool CamEnabled = true;
     public bool BobEnabled = true;
 
@@ -20,11 +21,10 @@ public class PlayerCameraLook : MonoBehaviour
 
     private bool _cursorLocked = false;
 
-    public float interactionHoverRaycastRange = 1.5f;
-
     void Start()
     {
         _character = player.GetComponent<CharacterController>();
+
         Cursor.lockState = CursorLockMode.Locked;
         _cursorLocked = true;
         _startPos = transform.localPosition;
@@ -49,33 +49,6 @@ public class PlayerCameraLook : MonoBehaviour
         transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, 1f - Mathf.Pow(.01f, Time.deltaTime));
         if (Mathf.Abs(transform.forward.y) < .9f) // gaurds from bug where rotation changes when looking down/up
             transform.LookAt(player.position + transform.forward * 15f);
-
-        // raycasts for interaction
-        PerformRaycastAtCrosshair();
-    }
-
-    void PerformRaycastAtCrosshair()
-    {
-        // Calculates the center of the screen in pixel coordinates
-        // Screen.width and Screen.height give the current screen resolution
-        Vector3 screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
-
-        // raycasts forward at screen center
-        Ray ray = Camera.main.ScreenPointToRay(screenCenter);
-
-        // Using the ray for a RaycastHit
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, interactionHoverRaycastRange))
-        {
-            // If the ray hits something, you can access 'hit.collider.gameObject', 'hit.point', etc.
-            GameObject hitObject = hit.collider.gameObject;
-
-            Interactable interactionInterface;
-            if (interactionInterface = hitObject.GetComponent<Interactable>())
-            {
-                interactionInterface.OnHover(gameObject); // sends hover event
-            }
-        }
     }
 
     public void OnCameraPan(InputAction.CallbackContext context)

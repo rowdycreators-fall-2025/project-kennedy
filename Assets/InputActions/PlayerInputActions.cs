@@ -284,6 +284,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InteractionAlt"",
+                    ""type"": ""Button"",
+                    ""id"": ""70ae5371-6006-4fdc-826a-247b4041a8db"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -295,6 +304,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""35578f34-c0d0-42f0-9f16-9d215b2fced1"",
+                    ""path"": ""<Keyboard>/#(C)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractionAlt"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -390,6 +410,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // Interact
         m_Interact = asset.FindActionMap("Interact", throwIfNotFound: true);
         m_Interact_Interaction = m_Interact.FindAction("Interaction", throwIfNotFound: true);
+        m_Interact_InteractionAlt = m_Interact.FindAction("InteractionAlt", throwIfNotFound: true);
         // Combat
         m_Combat = asset.FindActionMap("Combat", throwIfNotFound: true);
         m_Combat_ReloadWeapon = m_Combat.FindAction("ReloadWeapon", throwIfNotFound: true);
@@ -696,6 +717,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Interact;
     private List<IInteractActions> m_InteractActionsCallbackInterfaces = new List<IInteractActions>();
     private readonly InputAction m_Interact_Interaction;
+    private readonly InputAction m_Interact_InteractionAlt;
     /// <summary>
     /// Provides access to input actions defined in input action map "Interact".
     /// </summary>
@@ -711,6 +733,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Interact/Interaction".
         /// </summary>
         public InputAction @Interaction => m_Wrapper.m_Interact_Interaction;
+        /// <summary>
+        /// Provides access to the underlying input action "Interact/InteractionAlt".
+        /// </summary>
+        public InputAction @InteractionAlt => m_Wrapper.m_Interact_InteractionAlt;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -740,6 +766,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Interaction.started += instance.OnInteraction;
             @Interaction.performed += instance.OnInteraction;
             @Interaction.canceled += instance.OnInteraction;
+            @InteractionAlt.started += instance.OnInteractionAlt;
+            @InteractionAlt.performed += instance.OnInteractionAlt;
+            @InteractionAlt.canceled += instance.OnInteractionAlt;
         }
 
         /// <summary>
@@ -754,6 +783,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Interaction.started -= instance.OnInteraction;
             @Interaction.performed -= instance.OnInteraction;
             @Interaction.canceled -= instance.OnInteraction;
+            @InteractionAlt.started -= instance.OnInteractionAlt;
+            @InteractionAlt.performed -= instance.OnInteractionAlt;
+            @InteractionAlt.canceled -= instance.OnInteractionAlt;
         }
 
         /// <summary>
@@ -1048,6 +1080,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteraction(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "InteractionAlt" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInteractionAlt(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Combat" which allows adding and removing callbacks.
