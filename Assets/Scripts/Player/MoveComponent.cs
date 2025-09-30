@@ -4,7 +4,7 @@ using UnityEngine.TextCore.Text;
 [RequireComponent(typeof(CharacterController))]
 public class MoveComponent : MonoBehaviour
 {
-    private CharacterController controller;
+    private CharacterController _character;
     public Vector2 MoveDirection;
 
     [Header("Speed Values")]
@@ -23,7 +23,7 @@ public class MoveComponent : MonoBehaviour
 
     void Awake()
     {
-        controller = GetComponent<CharacterController>();
+        _character = GetComponent<CharacterController>();
     }
 
     void Update()
@@ -36,13 +36,13 @@ public class MoveComponent : MonoBehaviour
         CurrentWalkVelocity = Vector3.MoveTowards(CurrentWalkVelocity, targetWalkVelocity, GetWalkAccelValue() * Time.deltaTime);
 
         // gravity
-        if (IsOnGround()) _currentFallVelocity = 0;
+        if (_character.isGrounded && _currentFallVelocity < 0) _currentFallVelocity = 0;
         _currentFallVelocity -= GravityAccel * Time.deltaTime;
         Vector3 gravityVel = Vector3.up * _currentFallVelocity;
 
         // move player by walk velocity + fall velocity
         Vector3 moveVelocity = CurrentWalkVelocity + gravityVel;
-        controller.Move(moveVelocity * Time.deltaTime);
+        _character.Move(moveVelocity * Time.deltaTime);
     }
 
     // checks if shpere area at the bottom of the character collides with floor
