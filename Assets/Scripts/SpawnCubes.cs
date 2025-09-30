@@ -2,18 +2,19 @@ using UnityEngine;
 
 public class SpawnCubes : MonoBehaviour
 {
-    [SerializeField] private GameObject a;
-    public int cubesamt;
+    public GameObject Cube;
+    public int CubesAmount;
     void Start()
     {
-        for (int i = 0; i < cubesamt; i++)
+        for (int i = 0; i < CubesAmount; i++)
         {
             var x = Random.Range(-49,50);
+            var y = 8 + Random.Range(-3, 4);
             var z = Random.Range(-49,50);
 
-            var s = Instantiate(a);
-            s.transform.position = new Vector3(x,8 + Random.Range(-3,4),z);
-            s.transform.parent = transform;
+            var newCube = Instantiate(Cube);
+            newCube.transform.position = new Vector3(x,y,z);
+            newCube.transform.parent = transform;
 
         }
     }
