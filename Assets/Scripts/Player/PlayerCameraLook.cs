@@ -3,7 +3,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerCameraLook : MonoBehaviour
 {
-
     public Transform player;
     private CharacterController _character;
     public bool CamEnabled = true;
@@ -20,6 +19,8 @@ public class PlayerCameraLook : MonoBehaviour
     public float _bobStepAmplitude = 0.01f;
 
     private bool _cursorLocked = false;
+
+    public float interactionHoverRaycastRange = 1.5f;
 
     void Start()
     {
@@ -49,6 +50,7 @@ public class PlayerCameraLook : MonoBehaviour
         if (Mathf.Abs(transform.forward.y) < .9f) // gaurds from bug where rotation changes when looking down/up
             transform.LookAt(player.position + transform.forward * 15f);
 
+        // raycasts for interaction
         PerformRaycastAtCrosshair();
     }
 
@@ -63,17 +65,15 @@ public class PlayerCameraLook : MonoBehaviour
 
         // Using the ray for a RaycastHit
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, interactionHoverRaycastRange))
         {
             // If the ray hits something, you can access 'hit.collider.gameObject', 'hit.point', etc.
             GameObject hitObject = hit.collider.gameObject;
 
-            Debug.Log("Ray hit: " + hitObject.name + " at " + hit.point); // debug
-
             Interactable interactionInterface;
             if (interactionInterface = hitObject.GetComponent<Interactable>())
             {
-                interactionInterface.OnHover();
+                interactionInterface.OnHover(gameObject); // sends hover event
             }
         }
     }

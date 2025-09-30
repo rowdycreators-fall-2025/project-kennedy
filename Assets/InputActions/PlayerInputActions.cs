@@ -277,7 +277,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             ""id"": ""218555b4-7c1d-471b-b5c9-78dbe377c5ce"",
             ""actions"": [
                 {
-                    ""name"": ""PickUp"",
+                    ""name"": ""Interaction"",
                     ""type"": ""Button"",
                     ""id"": ""abfe5b38-7250-4783-89f6-79eefa3f02a2"",
                     ""expectedControlType"": """",
@@ -294,7 +294,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PickUp"",
+                    ""action"": ""Interaction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -305,7 +305,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             ""id"": ""bda7f1af-239e-432c-b2f2-6f7a63a89ee0"",
             ""actions"": [
                 {
-                    ""name"": ""Reload"",
+                    ""name"": ""ReloadWeapon"",
                     ""type"": ""Button"",
                     ""id"": ""689063cc-cd2b-4d0e-9229-bbf899d113ee"",
                     ""expectedControlType"": """",
@@ -314,7 +314,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Fire"",
+                    ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""11aed24f-7a31-441f-8a58-35c20b8ca661"",
                     ""expectedControlType"": """",
@@ -331,7 +331,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Reload"",
+                    ""action"": ""ReloadWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -342,7 +342,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Fire"",
+                    ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -353,7 +353,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             ""id"": ""223a35af-120e-4ef3-9c88-23cb9446c59f"",
             ""actions"": [
                 {
-                    ""name"": ""Drop"",
+                    ""name"": ""DropItem"",
                     ""type"": ""Button"",
                     ""id"": ""79f8060b-05f4-44d4-b4c1-4cfe4d90690b"",
                     ""expectedControlType"": """",
@@ -370,7 +370,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Drop"",
+                    ""action"": ""DropItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -389,14 +389,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Camera_ToggleCursorLock = m_Camera.FindAction("ToggleCursorLock", throwIfNotFound: true);
         // Interact
         m_Interact = asset.FindActionMap("Interact", throwIfNotFound: true);
-        m_Interact_PickUp = m_Interact.FindAction("PickUp", throwIfNotFound: true);
+        m_Interact_Interaction = m_Interact.FindAction("Interaction", throwIfNotFound: true);
         // Combat
         m_Combat = asset.FindActionMap("Combat", throwIfNotFound: true);
-        m_Combat_Reload = m_Combat.FindAction("Reload", throwIfNotFound: true);
-        m_Combat_Fire = m_Combat.FindAction("Fire", throwIfNotFound: true);
+        m_Combat_ReloadWeapon = m_Combat.FindAction("ReloadWeapon", throwIfNotFound: true);
+        m_Combat_Attack = m_Combat.FindAction("Attack", throwIfNotFound: true);
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
-        m_Inventory_Drop = m_Inventory.FindAction("Drop", throwIfNotFound: true);
+        m_Inventory_DropItem = m_Inventory.FindAction("DropItem", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -695,7 +695,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     // Interact
     private readonly InputActionMap m_Interact;
     private List<IInteractActions> m_InteractActionsCallbackInterfaces = new List<IInteractActions>();
-    private readonly InputAction m_Interact_PickUp;
+    private readonly InputAction m_Interact_Interaction;
     /// <summary>
     /// Provides access to input actions defined in input action map "Interact".
     /// </summary>
@@ -708,9 +708,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InteractActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Interact/PickUp".
+        /// Provides access to the underlying input action "Interact/Interaction".
         /// </summary>
-        public InputAction @PickUp => m_Wrapper.m_Interact_PickUp;
+        public InputAction @Interaction => m_Wrapper.m_Interact_Interaction;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -737,9 +737,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_InteractActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_InteractActionsCallbackInterfaces.Add(instance);
-            @PickUp.started += instance.OnPickUp;
-            @PickUp.performed += instance.OnPickUp;
-            @PickUp.canceled += instance.OnPickUp;
+            @Interaction.started += instance.OnInteraction;
+            @Interaction.performed += instance.OnInteraction;
+            @Interaction.canceled += instance.OnInteraction;
         }
 
         /// <summary>
@@ -751,9 +751,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="InteractActions" />
         private void UnregisterCallbacks(IInteractActions instance)
         {
-            @PickUp.started -= instance.OnPickUp;
-            @PickUp.performed -= instance.OnPickUp;
-            @PickUp.canceled -= instance.OnPickUp;
+            @Interaction.started -= instance.OnInteraction;
+            @Interaction.performed -= instance.OnInteraction;
+            @Interaction.canceled -= instance.OnInteraction;
         }
 
         /// <summary>
@@ -791,8 +791,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     // Combat
     private readonly InputActionMap m_Combat;
     private List<ICombatActions> m_CombatActionsCallbackInterfaces = new List<ICombatActions>();
-    private readonly InputAction m_Combat_Reload;
-    private readonly InputAction m_Combat_Fire;
+    private readonly InputAction m_Combat_ReloadWeapon;
+    private readonly InputAction m_Combat_Attack;
     /// <summary>
     /// Provides access to input actions defined in input action map "Combat".
     /// </summary>
@@ -805,13 +805,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public CombatActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Combat/Reload".
+        /// Provides access to the underlying input action "Combat/ReloadWeapon".
         /// </summary>
-        public InputAction @Reload => m_Wrapper.m_Combat_Reload;
+        public InputAction @ReloadWeapon => m_Wrapper.m_Combat_ReloadWeapon;
         /// <summary>
-        /// Provides access to the underlying input action "Combat/Fire".
+        /// Provides access to the underlying input action "Combat/Attack".
         /// </summary>
-        public InputAction @Fire => m_Wrapper.m_Combat_Fire;
+        public InputAction @Attack => m_Wrapper.m_Combat_Attack;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -838,12 +838,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_CombatActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_CombatActionsCallbackInterfaces.Add(instance);
-            @Reload.started += instance.OnReload;
-            @Reload.performed += instance.OnReload;
-            @Reload.canceled += instance.OnReload;
-            @Fire.started += instance.OnFire;
-            @Fire.performed += instance.OnFire;
-            @Fire.canceled += instance.OnFire;
+            @ReloadWeapon.started += instance.OnReloadWeapon;
+            @ReloadWeapon.performed += instance.OnReloadWeapon;
+            @ReloadWeapon.canceled += instance.OnReloadWeapon;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
         }
 
         /// <summary>
@@ -855,12 +855,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="CombatActions" />
         private void UnregisterCallbacks(ICombatActions instance)
         {
-            @Reload.started -= instance.OnReload;
-            @Reload.performed -= instance.OnReload;
-            @Reload.canceled -= instance.OnReload;
-            @Fire.started -= instance.OnFire;
-            @Fire.performed -= instance.OnFire;
-            @Fire.canceled -= instance.OnFire;
+            @ReloadWeapon.started -= instance.OnReloadWeapon;
+            @ReloadWeapon.performed -= instance.OnReloadWeapon;
+            @ReloadWeapon.canceled -= instance.OnReloadWeapon;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
         }
 
         /// <summary>
@@ -898,7 +898,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     // Inventory
     private readonly InputActionMap m_Inventory;
     private List<IInventoryActions> m_InventoryActionsCallbackInterfaces = new List<IInventoryActions>();
-    private readonly InputAction m_Inventory_Drop;
+    private readonly InputAction m_Inventory_DropItem;
     /// <summary>
     /// Provides access to input actions defined in input action map "Inventory".
     /// </summary>
@@ -911,9 +911,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InventoryActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Inventory/Drop".
+        /// Provides access to the underlying input action "Inventory/DropItem".
         /// </summary>
-        public InputAction @Drop => m_Wrapper.m_Inventory_Drop;
+        public InputAction @DropItem => m_Wrapper.m_Inventory_DropItem;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -940,9 +940,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_InventoryActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_InventoryActionsCallbackInterfaces.Add(instance);
-            @Drop.started += instance.OnDrop;
-            @Drop.performed += instance.OnDrop;
-            @Drop.canceled += instance.OnDrop;
+            @DropItem.started += instance.OnDropItem;
+            @DropItem.performed += instance.OnDropItem;
+            @DropItem.canceled += instance.OnDropItem;
         }
 
         /// <summary>
@@ -954,9 +954,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="InventoryActions" />
         private void UnregisterCallbacks(IInventoryActions instance)
         {
-            @Drop.started -= instance.OnDrop;
-            @Drop.performed -= instance.OnDrop;
-            @Drop.canceled -= instance.OnDrop;
+            @DropItem.started -= instance.OnDropItem;
+            @DropItem.performed -= instance.OnDropItem;
+            @DropItem.canceled -= instance.OnDropItem;
         }
 
         /// <summary>
@@ -1042,12 +1042,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public interface IInteractActions
     {
         /// <summary>
-        /// Method invoked when associated input action "PickUp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Interaction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnPickUp(InputAction.CallbackContext context);
+        void OnInteraction(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Combat" which allows adding and removing callbacks.
@@ -1057,19 +1057,19 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public interface ICombatActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Reload" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "ReloadWeapon" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnReload(InputAction.CallbackContext context);
+        void OnReloadWeapon(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Fire" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Attack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnFire(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Inventory" which allows adding and removing callbacks.
@@ -1079,11 +1079,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public interface IInventoryActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Drop" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "DropItem" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnDrop(InputAction.CallbackContext context);
+        void OnDropItem(InputAction.CallbackContext context);
     }
 }

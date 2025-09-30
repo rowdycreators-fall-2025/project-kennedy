@@ -191,7 +191,7 @@
             "id": "218555b4-7c1d-471b-b5c9-78dbe377c5ce",
             "actions": [
                 {
-                    "name": "PickUp",
+                    "name": "Interaction",
                     "type": "Button",
                     "id": "abfe5b38-7250-4783-89f6-79eefa3f02a2",
                     "expectedControlType": "",
@@ -208,7 +208,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PickUp",
+                    "action": "Interaction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -219,7 +219,7 @@
             "id": "bda7f1af-239e-432c-b2f2-6f7a63a89ee0",
             "actions": [
                 {
-                    "name": "Reload",
+                    "name": "ReloadWeapon",
                     "type": "Button",
                     "id": "689063cc-cd2b-4d0e-9229-bbf899d113ee",
                     "expectedControlType": "",
@@ -228,7 +228,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Fire",
+                    "name": "Attack",
                     "type": "Button",
                     "id": "11aed24f-7a31-441f-8a58-35c20b8ca661",
                     "expectedControlType": "",
@@ -245,7 +245,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Reload",
+                    "action": "ReloadWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -256,7 +256,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Fire",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -267,7 +267,7 @@
             "id": "223a35af-120e-4ef3-9c88-23cb9446c59f",
             "actions": [
                 {
-                    "name": "Drop",
+                    "name": "DropItem",
                     "type": "Button",
                     "id": "79f8060b-05f4-44d4-b4c1-4cfe4d90690b",
                     "expectedControlType": "",
@@ -284,7 +284,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Drop",
+                    "action": "DropItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
