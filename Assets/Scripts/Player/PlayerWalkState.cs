@@ -11,14 +11,14 @@ public class PlayerWalkState : State
 
     }
 
-    public override void Enter() 
+    public override void Enter()
     {
         Debug.Log("entered state");
         actions.Walking.Enable();
         actions.Walking.Jump.started += OnJump;
     }
 
-    public override void Exit() 
+    public override void Exit()
     {
         actions.Walking.Disable();
         actions.Walking.Jump.started -= OnJump;
