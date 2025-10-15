@@ -5,7 +5,11 @@ public class HurtState : BaseState
     private float hurtTimer = 5f;
     public override void Enter()
     {
-        
+        enemy.health -= gun.damage;
+        if (enemy.health <= 0.0f)
+        {
+            enemy.Die();
+        }
     }
 
     public override void Perform()
@@ -28,6 +32,7 @@ public class HurtState : BaseState
 
     public override void Exit()
     {
+        hurtTimer = 5f;
         gun.hitEnemy = false;
     }
 }
