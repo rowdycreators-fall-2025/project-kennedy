@@ -15,6 +15,12 @@ public class IdleState : BaseState
 
         if (gun.hitEnemy)
         {
+            enemy.health -= gun.damage;
+            if (enemy.health <= 0.0f) 
+            {
+                enemy.Die();
+            }
+
             stateMachine.ChangeState(new HurtState());
         }
     }

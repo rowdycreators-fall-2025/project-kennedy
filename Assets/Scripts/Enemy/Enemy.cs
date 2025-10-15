@@ -4,16 +4,19 @@ public class Enemy : MonoBehaviour
 {
     private StateMachine stateMachine;
     private GameObject player;
-
     public Gun gun;
 
+    [SerializeField]
+    private string currentState;
+
+    public float health = 50f;
+    
     [Header("SightValues")]
     public float sightDistance = 20f;
     public float fieldOfView = 85f;
     public float eyeHeight;
     
-    [SerializeField]
-    private string currentState;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -57,5 +60,10 @@ public class Enemy : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void Die() 
+    {
+        Destroy(gameObject);
     }
 }

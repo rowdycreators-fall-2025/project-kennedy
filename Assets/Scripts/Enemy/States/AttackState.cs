@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class AttackState : BaseState
@@ -25,6 +26,13 @@ public class AttackState : BaseState
 
         if (gun.hitEnemy) 
         {
+            enemy.health -= gun.damage;
+
+            if (enemy.health <= 0.0f)
+            {
+                enemy.Die();
+            }
+
             stateMachine.ChangeState(new HurtState());
         }
     }
