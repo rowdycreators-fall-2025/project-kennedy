@@ -5,16 +5,20 @@ public class PlayerMotor : MonoBehaviour
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool isGrounded;
-    
+
+    //public Camera cam;
     [Header("Movement Values")]
     public float speed = 5f;
     public float gravity = -9.8f;
     public float jumpHeight = 1.5f;
-    [Header("Weapon Values")]
-    public Transform gunBarrel;
     
+    /*[Header("Weapon Values")]
+    public Transform gunBarrel;
+    public float damage = 10f;
+    public float range = 100f;
+
     [Range(0.1f, 10)]
-    public float fireRate;
+    public float fireRate;*/
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,6 +30,7 @@ public class PlayerMotor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.DrawRay(gunBarrel.position,gunBarrel.forward * range);
         isGrounded = controller.isGrounded;
     }
 
@@ -51,8 +56,15 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
-    public void Shoot()
+    /*public void Shoot()
     {
         Debug.Log("Shooting!");
-    }
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range)) 
+        {
+            Debug.Log(hit.transform.name);
+        }
+    }*/
 }

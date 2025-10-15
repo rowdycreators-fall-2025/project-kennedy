@@ -22,6 +22,11 @@ public class AttackState : BaseState
                 stateMachine.ChangeState(new IdleState());
             }
         }
+
+        if (gun.hitEnemy) 
+        {
+            stateMachine.ChangeState(new HurtState());
+        }
     }
 
     public override void Exit()

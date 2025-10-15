@@ -8,15 +8,17 @@ public class InputManager : MonoBehaviour
     private PlayerInput.WalkingActions walking;
     private PlayerMotor motor;
     private PlayerLook look;
+    private Gun gun;
     void Awake()
     {
 
         playerInput = new PlayerInput();
         walking = playerInput.Walking;
         motor = GetComponent<PlayerMotor>();
+        gun = GetComponentInChildren<Gun>();
         look = GetComponent<PlayerLook>();
         walking.Jump.performed += ctx => motor.Jump();
-        walking.Shoot.performed += ctx => motor.Shoot();
+        walking.Shoot.performed += ctx => gun.Shoot();
 
     }
 

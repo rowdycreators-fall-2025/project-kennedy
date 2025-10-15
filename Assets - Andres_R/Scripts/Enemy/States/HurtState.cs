@@ -28,6 +28,6 @@ public class HurtState : BaseState
 
     public override void Exit()
     {
-        
+        gun.hitEnemy = false;
     }
 }

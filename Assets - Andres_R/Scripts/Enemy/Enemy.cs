@@ -5,6 +5,8 @@ public class Enemy : MonoBehaviour
     private StateMachine stateMachine;
     private GameObject player;
 
+    public Gun gun;
+
     [Header("SightValues")]
     public float sightDistance = 20f;
     public float fieldOfView = 85f;
