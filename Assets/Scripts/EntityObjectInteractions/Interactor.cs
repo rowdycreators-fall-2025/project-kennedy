@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Events;
 using Unity.VisualScripting;
+using Unity.IO.LowLevel.Unsafe;
 
 // Interactor = an entity that can interact with Interactables
 
@@ -46,7 +47,8 @@ public class Interactor : MonoBehaviour
         RemoveIneligibleActionChoices();
     }
 
-    //
+
+    protected virtual Ray CreateRayToCast() => new Ray(transform.position, transform.forward);
 
     private void RemoveIneligibleActionChoices()
     {
@@ -117,26 +119,24 @@ public class Interactor : MonoBehaviour
 
     //
 
-    protected virtual Ray CreateRayToCast()
-    {
-        return new Ray(gameObject.transform.position, gameObject.transform.forward);
-    }
 
     protected virtual void FocusInteractable(Interactable i)
     {
-        if (i != interactableInFocus)
+        if (i == null || i != interactableInFocus)
         {
             ClearChoices();
             interactableInFocus = i;
         }
     }
 
-    protected RaycastHit PerformRaycast(Ray ray)
+
+
+    // raycasts and updates focus
+    RaycastHit Look()
     {
         bool foundInteractable = false;
-        // Using the ray for a RaycastHit
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, maxFocusDistance))
+        if (Physics.Raycast(CreateRayToCast(), out hit, maxFocusDistance))
         {
             // If the ray hits something, you can access 'hit.collider.gameObject', 'hit.point', etc.
             GameObject hitObject = hit.collider.gameObject;
@@ -154,11 +154,5 @@ public class Interactor : MonoBehaviour
             // Debug.Log("should have no focus");
         }
         return hit;
-    }
-
-    void Look()
-    {
-        // Debug.Log("Interactor : Look");
-        PerformRaycast(CreateRayToCast());
     }
 }
