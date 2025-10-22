@@ -13,20 +13,24 @@ public class GunHolder : MonoBehaviour
     {
         inputActions = new PlayerInputActions();
         inputActions.Enable();
-        SetGun(new Gun());
     }
+
+    public void RemoveGun() => SetGun(null);
 
     public void SetGun(Gun gun)
     {
         CurrentGun = gun;
         if (gun != null)
         {
-            Debug.Log("yes gun");
+            Debug.Log($"added gun: {gun}");
             inputActions.Combat.Attack.started += Shoot;
+            GameObject newGun = Instantiate(gun.gunModel, transform);
+            newGun.transform.position = transform.TransformPoint(1f,-0.5f,1.5f);
+            newGun.transform.localScale = new Vector3(.3f, .3f, .3f);
         }
         else
         {
-            Debug.Log("no gun");
+            Debug.Log("removed gun");
             inputActions.Combat.Attack.started -= Shoot;
         }
     }
@@ -36,12 +40,12 @@ public class GunHolder : MonoBehaviour
         Debug.Log("shooting");
 
         RaycastHit hit;
-        Physics.Raycast(transform.position, transform.forward, out hit, MaxShootRange);
+        Physics.Raycast(transform.position, GetComponentInChildren<Camera>().transform.forward, out hit, MaxShootRange);
         if (hit.collider == null) { return; }
 
         Shootable shootable = hit.collider.GetComponent<Shootable>();
         if (shootable == null) { return; }
 
-        shootable.Shoot(5);
+        shootable.Shoot(CurrentGun.ShootDamage);
     }
 }
