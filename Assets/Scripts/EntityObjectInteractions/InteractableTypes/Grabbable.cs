@@ -20,11 +20,13 @@ public class Grabbable : Interactable
 
     public void PerformGrab(Interactor grabber)
     {
+        GetComponent<Rigidbody>().isKinematic = true;
         gameObject.transform.SetParent(grabber.gameObject.transform, true); // worldPositionStays = true
         Debug.Log("Grabbable: grabbed object");
     }
     public void PerformRelease(Interactor grabber)
     {
+        GetComponent<Rigidbody>().isKinematic = false;
         gameObject.transform.SetParent(null, true); // worldPositionStays = true
         Debug.Log("Grabbable: let go of object");
     }
