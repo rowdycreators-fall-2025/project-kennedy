@@ -19,18 +19,23 @@ public class EnemyIdleState : State
     public override void Update()
     {
         // NOTE: temporary logic for the Idle State
-        // will switch do the Chase State if up arrow key is pressed
+        // will switch to the Chase State if up arrow key is pressed
         if(Input.GetKeyDown(KeyCode.UpArrow) == true)
         {
             _stateMachine.ChangeState(new EnemyChaseState(_stateMachine));
         }
+
+        // will switch to the Hurt State if left arrow key is pressed
+        if(Input.GetKeyDown(KeyCode.LeftArrow) == true)
+        {
+            _stateMachine.ChangeState(new EnemyHurtState(_stateMachine));
+        }
+
     }
 
     // function Exit is called when the State leaves
     public override void Exit()
     {
-        // message that state the State has been exited (for debugging purposes)
         Debug.Log("Enemy has exited the Idle State");
-
     }
 }
