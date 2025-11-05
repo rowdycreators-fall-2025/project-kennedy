@@ -10,6 +10,9 @@ public class EnemyChaseState : State
     private NavMeshAgent navAgent;
     private Transform player;
 
+    private float navAgentRefreshRate = 10;
+    private float coolDownTimer = 0;
+
     public override void Enter()
     {
         Debug.Log("Enemy has entered the Chase State");
@@ -24,16 +27,19 @@ public class EnemyChaseState : State
 
     public override void Update()
     {
-        // NOTE: temporary logic for the Chase State
-        // will switch do the Idle State if up arrow key is pressed
-        if (Input.GetKeyDown(KeyCode.DownArrow) == true)
+        coolDownTimer += Time.deltaTime;
+        if (coolDownTimer >= 1.0 / navAgentRefreshRate)
         {
-            _stateMachine.ChangeState(new EnemyIdleState(_stateMachine));
+            while (coolDownTimer >= 1.0 / navAgentRefreshRate)
+                coolDownTimer -= 1.0f / navAgentRefreshRate;
+            navAgent.SetDestination(player.position);
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) == true)
+
+        float distanceToPlayer = (_stateMachine.transform.position - player.position).magnitude;
+        if (distanceToPlayer <= 5)
         {
-            _stateMachine.ChangeState(new EnemyChaseState(_stateMachine));
+            _stateMachine.ChangeState(new EnemyAttackState(_stateMachine));
         }
 
     }
