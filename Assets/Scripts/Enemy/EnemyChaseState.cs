@@ -14,9 +14,8 @@ public class EnemyChaseState : State
     {
         Debug.Log("Enemy has entered the Chase State");
 
-        // set navAgent and player variables
         navAgent = _stateMachine.GetComponent<NavMeshAgent>();
-        player = ((EnemyStateMachine) _stateMachine).player; // cast StateMachine to EnemyStateMachine to access player attribute
+        player = ((EnemyStateMachine)_stateMachine).player;
 
         navAgent.enabled = true;
         navAgent.SetDestination(player.position);
@@ -34,7 +33,7 @@ public class EnemyChaseState : State
 
         if (Input.GetKeyDown(KeyCode.UpArrow) == true)
         {
-            _stateMachine.ChangeState(new EnemyChaseState(_stateMachine)); // restart cycle
+            _stateMachine.ChangeState(new EnemyChaseState(_stateMachine));
         }
 
     }
