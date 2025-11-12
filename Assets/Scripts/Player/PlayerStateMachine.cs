@@ -15,6 +15,7 @@ public class PlayerStateMachine : StateMachine
     public void Hit(float damage)
     {
         health -= damage;
-        
+
+        ChangeState(new PlayerHurtState(this));
     }
 }

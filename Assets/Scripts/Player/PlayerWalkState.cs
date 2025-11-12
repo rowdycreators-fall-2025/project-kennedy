@@ -13,13 +13,15 @@ public class PlayerWalkState : State
 
     public override void Enter()
     {
-        Debug.Log("entered state");
+        Debug.Log("entered PlayerWalkState");
         actions.Walking.Enable();
         actions.Walking.Jump.started += OnJumpAction;
     }
 
     public override void Exit()
     {
+        Debug.Log("exited PlayerWalkState");
+
         actions.Walking.Disable();
         actions.Walking.Jump.started -= OnJumpAction;
     }
