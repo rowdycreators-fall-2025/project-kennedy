@@ -6,6 +6,7 @@ public class EnemyStateMachine : StateMachine
     public float attackReach = 1.5f;
 
     public Transform player;
+    public Animator spriteAnimator;
     private void Start()
     {
         ChangeState(new EnemyIdleState(this));

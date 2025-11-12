@@ -336,6 +336,7 @@ MonoBehaviour:
   health: 100
   attackReach: 1.5
   player: {fileID: 319811204}
+  spriteAnimator: {fileID: 800435853}
 --- !u!4 &8075785
 Transform:
   m_ObjectHideFlags: 0

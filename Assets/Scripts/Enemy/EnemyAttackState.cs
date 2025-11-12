@@ -9,6 +9,7 @@ public class EnemyAttackState : State
     private float coolDownTimer = 0;
 
     private Transform player;
+    private Animator spriteAnimator;
 
     public EnemyAttackState(StateMachine enemyStateMachine) : base(enemyStateMachine) { }
        
@@ -18,21 +19,26 @@ public class EnemyAttackState : State
         Debug.Log("Enemy has entered the Attack State");
 
         player = ((EnemyStateMachine)_stateMachine).player;
+        spriteAnimator = ((EnemyStateMachine)_stateMachine).spriteAnimator;
+
     }
 
     public override void Update()
     {
+        float playerDistance = (_stateMachine.transform.position - player.position).magnitude;
+        // if enemy cant reach player
+        if (playerDistance > ((EnemyStateMachine)_stateMachine).attackReach)
+        {
+            _stateMachine.ChangeState(new EnemyChaseState(_stateMachine));
+            return;
+        }
+
+
         // guaranteed attack on first Update
         if (coolDownTimer <= 0)
         {
-            float playerDistance = (_stateMachine.transform.position - player.position).magnitude;
-
-            // if enemy cant reach player
-            if (playerDistance > ((EnemyStateMachine)_stateMachine).attackReach)
-            {
-                _stateMachine.ChangeState(new EnemyChaseState(_stateMachine));
-                return;
-            }
+            Debug.Log("attacked!!!");
+            spriteAnimator.SetTrigger("attacked");
 
             player.GetComponent<PlayerStateMachine>().Hit(10);
             coolDownTimer = COOLDOWN_TIME;
