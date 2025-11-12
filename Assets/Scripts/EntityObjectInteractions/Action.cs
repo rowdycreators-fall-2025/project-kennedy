@@ -89,4 +89,5 @@ public class Action
         return false;
     }
 
+    public override int GetHashCode() => base.GetHashCode();
 }
