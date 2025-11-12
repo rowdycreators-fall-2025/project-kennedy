@@ -7,8 +7,11 @@ public class BillboardEffect : MonoBehaviour
 
     public void LateUpdate()
     {
-        transform.LookAt(lookTarget,Vector3.up);
+        // target position, but at this gameobject's y level
+        Vector3 targetLookPosition = new Vector3(lookTarget.position.x, transform.position.y, lookTarget.position.z);
+
+        // look at target position, then flip 180 (unity's sprite renderer is weird)
+        transform.LookAt(targetLookPosition, Vector3.up);
         transform.Rotate(Vector3.up, 180, Space.Self);
-        transform.Rotate(Vector3.right, -transform.rotation.eulerAngles.x, Space.Self);
     }
 }

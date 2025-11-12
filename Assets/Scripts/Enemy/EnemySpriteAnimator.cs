@@ -23,13 +23,16 @@ public class EnemySpriteAnimator : MonoBehaviour
         _animator.SetBool("isWalking", !Mathf.Approximately(_agent.velocity.magnitude, 0));
 
         Vector3 directionToPlayer = (_player.position - transform.position);
+
+        // represent the directions as Vector2's since x and z is all we need.
         Vector2 flattenedDirectionToPlayer = new Vector2(directionToPlayer.x, directionToPlayer.z).normalized;
-
         Vector2 flattenedAgentMoveDirection = new Vector2(_agent.velocity.x, _agent.velocity.z).normalized;
-        Debug.Log(flattenedAgentMoveDirection);
 
+        // get the angle between the two unit vectors
         float angleTo = Vector2.SignedAngle(flattenedDirectionToPlayer, flattenedAgentMoveDirection);
 
+        // rotates the default Vector2.down by the angle.
+        // relative direction being "Vector2.down" means the enemy is walking straight for the target.
         Vector2 relativeDirection = Quaternion.Euler(0, 0, angleTo) * Vector2.down;
 
         _animator.SetFloat("relativeX", relativeDirection.x);

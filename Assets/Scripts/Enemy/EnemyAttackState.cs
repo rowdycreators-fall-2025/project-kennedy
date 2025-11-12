@@ -10,25 +10,24 @@ public class EnemyAttackState : State
 
     private Transform player;
 
-    // constructer for EnemyAttackState, takes a StateMachine as a parameter, and sets the StateMachine type as the owner of the base class (State)
     public EnemyAttackState(StateMachine enemyStateMachine) : base(enemyStateMachine) { }
        
 
-    // function Enter is called when the State first enters
     public override void Enter()
     {
-        // message that states the State has entered (for debugging purposes)
         Debug.Log("Enemy has entered the Attack State");
 
         player = ((EnemyStateMachine)_stateMachine).player;
     }
 
-    // Update function that contains the actual logic of the State, called every frame
     public override void Update()
     {
+        // guaranteed attack on first Update
         if (coolDownTimer <= 0)
         {
             float playerDistance = (_stateMachine.transform.position - player.position).magnitude;
+
+            // if enemy cant reach player
             if (playerDistance > ((EnemyStateMachine)_stateMachine).attackReach)
             {
                 _stateMachine.ChangeState(new EnemyChaseState(_stateMachine));
@@ -40,7 +39,6 @@ public class EnemyAttackState : State
         }
 
         coolDownTimer -= Time.deltaTime;
-
     }
 
     // function Exit is called when the State leaves

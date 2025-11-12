@@ -10,7 +10,7 @@ public class EnemyChaseState : State
     private NavMeshAgent navAgent;
     private Transform player;
 
-    private float navAgentRefreshRate = 10;
+    private float navAgentRefreshRatePerSecond = 10;
     private float coolDownTimer = 0;
 
     public override void Enter()
@@ -28,15 +28,16 @@ public class EnemyChaseState : State
     public override void Update()
     {
         coolDownTimer += Time.deltaTime;
-        if (coolDownTimer >= 1.0 / navAgentRefreshRate)
+
+        if (coolDownTimer >= 1.0 / navAgentRefreshRatePerSecond)
         {
-            while (coolDownTimer >= 1.0 / navAgentRefreshRate)
-                coolDownTimer -= 1.0f / navAgentRefreshRate;
+            coolDownTimer = coolDownTimer % (1f / navAgentRefreshRatePerSecond);
             navAgent.SetDestination(player.position);
         }
 
 
         float distanceToPlayer = (_stateMachine.transform.position - player.position).magnitude;
+        // if enemy can reach player
         if (distanceToPlayer <= ((EnemyStateMachine)_stateMachine).attackReach)
         {
             _stateMachine.ChangeState(new EnemyAttackState(_stateMachine));

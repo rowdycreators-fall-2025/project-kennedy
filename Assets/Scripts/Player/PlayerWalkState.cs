@@ -15,13 +15,13 @@ public class PlayerWalkState : State
     {
         Debug.Log("entered state");
         actions.Walking.Enable();
-        actions.Walking.Jump.started += OnJump;
+        actions.Walking.Jump.started += OnJumpAction;
     }
 
     public override void Exit()
     {
         actions.Walking.Disable();
-        actions.Walking.Jump.started -= OnJump;
+        actions.Walking.Jump.started -= OnJumpAction;
     }
 
     public override void Update()
@@ -29,7 +29,7 @@ public class PlayerWalkState : State
         move.MoveDirection = actions.Walking.Walk.ReadValue<Vector2>();
     }
 
-    void OnJump(InputAction.CallbackContext ctx)
+    void OnJumpAction(InputAction.CallbackContext ctx)
     {
         if (move.IsOnGround()) move.Jump();
     }
