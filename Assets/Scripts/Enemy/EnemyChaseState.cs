@@ -37,7 +37,7 @@ public class EnemyChaseState : State
 
 
         float distanceToPlayer = (_stateMachine.transform.position - player.position).magnitude;
-        if (distanceToPlayer <= 5)
+        if (distanceToPlayer <= ((EnemyStateMachine)_stateMachine).attackReach)
         {
             _stateMachine.ChangeState(new EnemyAttackState(_stateMachine));
         }

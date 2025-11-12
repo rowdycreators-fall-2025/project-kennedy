@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 // State Machine class, this class will contain the logic needed for States to change
@@ -16,6 +17,13 @@ public class StateMachine : MonoBehaviour
 
     private void Update()
     {
-        currentState.Update();
+        try
+        {
+            currentState.Update();
+        } catch (Exception e)
+        {
+            Debug.LogException(e);
+            Debug.Log(currentState.ToString());
+        }
     }
 }
