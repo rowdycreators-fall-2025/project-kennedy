@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 1959554016955029797}
   - component: {fileID: 2530214461248545060}
   - component: {fileID: 1026292470006967555}
+  - component: {fileID: 1753243961353285328}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -202,3 +203,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpriteAnimator
   _player: {fileID: 0}
   _agent: {fileID: 6806861000473124422}
+--- !u!114 &1753243961353285328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3183440599827004086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e5067f0018d5ec4589ac0c4e524161c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BillboardEffect
+  lookTarget: {fileID: 0}
