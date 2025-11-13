@@ -15,7 +15,7 @@ public class StateMachine : MonoBehaviour
         currentState.Enter();
     }
 
-    private void Update()
+    protected void Update()
     {
         try
         {

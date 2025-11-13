@@ -5,9 +5,6 @@ using UnityEngine;
 public class EnemyAttackState : State
 {
 
-    private const float COOLDOWN_TIME = 2;
-    private float coolDownTimer = 0;
-
     private Transform player;
     private Animator spriteAnimator;
 
@@ -33,18 +30,16 @@ public class EnemyAttackState : State
             return;
         }
 
-
+        EnemyStateMachine agent = (EnemyStateMachine) _stateMachine;
         // guaranteed attack on first Update
-        if (coolDownTimer <= 0)
+        if (agent.attackCooldownTimer <= 0)
         {
             Debug.Log("attacked!!!");
             spriteAnimator.SetTrigger("attacked");
 
             player.GetComponent<PlayerStateMachine>().Hit(10);
-            coolDownTimer = COOLDOWN_TIME;
+            agent.attackCooldownTimer = agent.cooldown_duration;
         }
-
-        coolDownTimer -= Time.deltaTime;
     }
 
     // function Exit is called when the State leaves

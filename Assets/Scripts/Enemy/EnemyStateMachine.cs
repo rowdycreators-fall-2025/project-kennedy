@@ -7,9 +7,21 @@ public class EnemyStateMachine : StateMachine
 
     public Transform player;
     public Animator spriteAnimator;
+
+    public float cooldown_duration = 2;
+    public float attackCooldownTimer = 0;
+
+
     private void Start()
     {
         ChangeState(new EnemyIdleState(this));
+    }
+
+    protected void Update()
+    {
+        base.Update();
+
+        attackCooldownTimer -= Time.deltaTime;
     }
 
     public void Damage(float damage)
