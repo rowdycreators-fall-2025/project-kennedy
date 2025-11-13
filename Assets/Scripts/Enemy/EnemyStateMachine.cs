@@ -17,7 +17,7 @@ public class EnemyStateMachine : StateMachine
         ChangeState(new EnemyIdleState(this));
     }
 
-    protected void Update()
+    protected override void Update()
     {
         base.Update();
 
