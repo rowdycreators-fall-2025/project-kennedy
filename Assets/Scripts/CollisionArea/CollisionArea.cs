@@ -9,7 +9,7 @@ public class CollisionArea : MonoBehaviour
 
     private Collider _collider;
 
-    public string _tag = "Default";
+    public string _tag = "";
 
     void Awake()
     {
