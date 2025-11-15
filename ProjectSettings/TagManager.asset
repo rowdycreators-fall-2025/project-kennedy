@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - UI_HUD
+  - Global Volume
   layers:
   - Default
   - TransparentFX
