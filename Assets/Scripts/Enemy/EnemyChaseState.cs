@@ -48,8 +48,8 @@ public class EnemyChaseState : State
 
     public override void Exit()
     {
-        // stops nav agent without disabling it
         navAgent.SetDestination(_stateMachine.transform.position);
+        navAgent.enabled = false;
 
         Debug.Log("Enemy has exited the Chase State");
     }

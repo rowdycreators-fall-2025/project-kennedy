@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.AI;
 
+[RequireComponent (typeof(NavMeshAgent))]
 public class EnemyStateMachine : StateMachine
 {
     public float health = 100;

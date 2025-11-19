@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Collider))]
 public class CollisionArea : MonoBehaviour
 {
 
@@ -8,6 +9,8 @@ public class CollisionArea : MonoBehaviour
     public UnityEvent onAreaExit;
 
     private Collider _collider;
+
+    public string _tag = "";
 
     void Awake()
     {
@@ -17,7 +20,15 @@ public class CollisionArea : MonoBehaviour
         //onAreaEntered.AddListener(() => Debug.Log("area entered"));
     }
 
-    private void OnTriggerEnter(Collider other) => onAreaEntered.Invoke();
+    private void ifMatch(Collider other, UnityEvent uEvent)
+    {
+        if (other.CompareTag(_tag))
+        {
+            uEvent.Invoke();
+        }
+    }
 
-    private void OnTriggerExit(Collider other) => onAreaExit.Invoke();
+    private void OnTriggerEnter(Collider other) => ifMatch(other, onAreaEntered);
+
+    private void OnTriggerExit(Collider other) => ifMatch(other, onAreaExit);
 }
