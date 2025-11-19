@@ -5,10 +5,11 @@ public class PlayerWalkState : State
 {
     PlayerInputActions actions = new PlayerInputActions();
     MoveComponent move;
+    private Gun gun;
     public PlayerWalkState(StateMachine stateMachine) : base(stateMachine)
     {
         move = stateMachine.GetComponent<MoveComponent>();
-
+        gun = stateMachine.GetComponent<Gun>();
     }
 
     public override void Enter()
@@ -16,6 +17,7 @@ public class PlayerWalkState : State
         Debug.Log("entered PlayerWalkState");
         actions.Walking.Enable();
         actions.Walking.Jump.started += OnJumpAction;
+        actions.Combat.Attack.started += OnAttackAction;
     }
 
     public override void Exit()
@@ -23,7 +25,9 @@ public class PlayerWalkState : State
         Debug.Log("exited PlayerWalkState");
 
         actions.Walking.Disable();
+        actions.Combat.Disable();
         actions.Walking.Jump.started -= OnJumpAction;
+        actions.Combat.Attack.started -= OnAttackAction;
     }
 
     public override void Update()
@@ -34,5 +38,10 @@ public class PlayerWalkState : State
     void OnJumpAction(InputAction.CallbackContext ctx)
     {
         if (move.IsOnGround()) move.Jump();
+    }
+
+    void OnAttackAction(InputAction.CallbackContext ctx)
+    {
+        gun.Shoot();
     }
 }
