@@ -24,13 +24,26 @@ public class EnemyStateMachine : StateMachine
         base.Update();
 
         attackCooldownTimer -= Time.deltaTime;
+
+        if (gun.hitEnemy)
+        {
+            Damage(gun.damage);
+            gun.hitEnemy = false;
+        }
     }
 
     public void Damage(float damage)
     {
         health -= damage;
-        ChangeState(new EnemyHurtState(this));
-
+        
+        if (health <= 0f)
+        {
+            ChangeState(new EnemyDeadState(this));
+        }
+        else
+        {
+            ChangeState(new EnemyHurtState(this));
+        }
     }
 
     public void SetChase()
