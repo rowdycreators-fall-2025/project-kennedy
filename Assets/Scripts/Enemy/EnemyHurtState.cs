@@ -5,7 +5,7 @@ public class EnemyHurtState : State
 {
     // constructer for EnemyHurtState, takes a StateMachine as a parameter, and sets the StateMachine type as the owner of the base class (State)
     public EnemyHurtState(StateMachine enemyStateMachine) : base(enemyStateMachine) { }
-    private floar hurtTimer = 5f;
+    private float hurtTimer = 5f;
     // function Enter is called when the State first enters
     public override void Enter()
     {
