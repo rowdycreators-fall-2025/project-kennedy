@@ -4,6 +4,7 @@ using UnityEngine.AI;
 [RequireComponent (typeof(NavMeshAgent))]
 public class EnemyStateMachine : StateMachine
 {
+    public Gun gun;
     public float health = 100;
     public float attackReach = 1.5f;
 
