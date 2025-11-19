@@ -46,6 +46,6 @@ public class GunHolder : MonoBehaviour
         Shootable shootable = hit.collider.GetComponent<Shootable>();
         if (shootable == null) { return; }
 
-        shootable.Shoot(CurrentGun.ShootDamage);
+        shootable.Shoot(CurrentGun.damage);
     }
 }

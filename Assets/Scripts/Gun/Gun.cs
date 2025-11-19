@@ -41,7 +41,6 @@ public class Gun : MonoBehaviour
             }
         }
     }
-    public Gun() { }
 
     public Gun(float damage, GameObject gunModel)
     {
