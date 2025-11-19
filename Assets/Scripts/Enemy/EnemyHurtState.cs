@@ -5,7 +5,7 @@ public class EnemyHurtState : State
 {
     // constructer for EnemyHurtState, takes a StateMachine as a parameter, and sets the StateMachine type as the owner of the base class (State)
     public EnemyHurtState(StateMachine enemyStateMachine) : base(enemyStateMachine) { }
-
+    private float hurtTimer = 5f;
     // function Enter is called when the State first enters
     public override void Enter()
     {
@@ -15,7 +15,11 @@ public class EnemyHurtState : State
     // Update function that contains the actual logic of the State, called every frame
     public override void Update()
     {
-        
+        hurtTimer -= Time.deltaTime;
+        if (hurtTimer <= 0f)
+        {
+            _stateMachine.ChangeState(new EnemyChaseState(_stateMachine));
+        }
     }
 
 
