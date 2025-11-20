@@ -30,6 +30,8 @@ public class Gun : MonoBehaviour
         Debug.Log("Shooting!");
 
         RaycastHit hit;
+
+        Debug.Log(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range));
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range))
         {
             Debug.Log("Hit: " + hit.transform.name);
@@ -44,7 +46,7 @@ public class Gun : MonoBehaviour
 
     public Gun(float damage, GameObject gunModel)
     {
-        this.gunModel = gunModel;
-        this.damage = damage;
+        //this.gunModel = gunModel;
+        //this.damage = damage;
     }
 }
