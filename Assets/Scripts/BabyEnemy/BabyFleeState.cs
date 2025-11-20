@@ -23,6 +23,8 @@ public class BabyFleeState : State
     public override void Update()
     {
         Vector3 translation = _fleePoint.position - _stateMachine.transform.position;
+        if (translation.magnitude < 1f / 4) _stateMachine.ChangeState(new BabyIdleState(_stateMachine));
+
         _move.MoveDirection = new Vector2(translation.x, translation.z).normalized;
     }
 
