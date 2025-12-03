@@ -11,6 +11,7 @@ public class EnemyDeadState : State
     {
         // message that states the State has entered (for debugging purposes)
         Debug.Log("Enemy has entered the Dead State");
+        GameObject.Destroy(_stateMachine.gameObject);
     }
 
     // Update function that contains the actual logic of the State, called every frame
