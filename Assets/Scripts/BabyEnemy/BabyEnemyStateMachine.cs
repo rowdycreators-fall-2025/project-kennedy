@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BabyEnemyStateMachine : StateMachine
+public class BabyEnemyStateMachine : EnemyStateMachine
 {
 
     public Transform _fleePoint;

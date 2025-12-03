@@ -9,13 +9,14 @@ public class PlayerWalkState : State
     public PlayerWalkState(StateMachine stateMachine) : base(stateMachine)
     {
         move = stateMachine.GetComponent<MoveComponent>();
-        gun = stateMachine.GetComponent<Gun>();
+        gun = stateMachine.GetComponentInChildren<Gun>();
     }
 
     public override void Enter()
     {
         Debug.Log("entered PlayerWalkState");
         actions.Walking.Enable();
+        actions.Combat.Enable();
         actions.Walking.Jump.started += OnJumpAction;
         actions.Combat.Attack.started += OnAttackAction;
     }
