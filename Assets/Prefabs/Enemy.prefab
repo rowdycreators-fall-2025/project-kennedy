@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87a66b2138ca6854e9217dacdeff61a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStateMachine
+  gun: {fileID: 0}
   health: 100
   attackReach: 1.5
   player: {fileID: 0}
@@ -87,6 +88,7 @@ GameObject:
   - component: {fileID: 2530214461248545060}
   - component: {fileID: 1026292470006967555}
   - component: {fileID: 1753243961353285328}
+  - component: {fileID: 2629940167068270342}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -215,3 +217,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BillboardEffect
   lookTarget: {fileID: 0}
+--- !u!136 &2629940167068270342
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3183440599827004086}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Height: 0.29
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
